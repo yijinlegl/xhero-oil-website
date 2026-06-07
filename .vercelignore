@@ -1,0 +1,7 @@
+AGENTS.md
+support/
+cases/
+src/
+.git/
+node_modules/
+*.log

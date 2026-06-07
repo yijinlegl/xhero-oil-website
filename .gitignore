@@ -1,0 +1,7 @@
+AGENTS.md
+support/
+cases/
+src/
+.vercel/
+node_modules/
+*.log
