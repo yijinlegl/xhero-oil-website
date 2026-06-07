@@ -1,6 +1,6 @@
 # Xhero Website
 
-上海希罗石油化工有限公司官方网站项目。
+上海希罗石油化工有限公司官方网站发布目录。
 
 ## 目录结构
 
@@ -10,13 +10,13 @@
 - `about/`：关于我们
 - `contact/`：联系我们
 - `assets/`：图片、样式和交互脚本
-- `server.mjs`：本地预览服务器
+- `tools/local-server.mjs`：本地预览服务
 - `vercel.json`：Vercel 部署配置
 
 ## 本地预览
 
 ```bash
-node server.mjs
+npm run dev
 ```
 
 打开 `http://127.0.0.1:4173/` 查看网站。
