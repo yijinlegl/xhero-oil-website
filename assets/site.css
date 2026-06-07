@@ -28,7 +28,7 @@ body {
   color: var(--ink);
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.78), rgba(238, 246, 246, 0.52) 42%, rgba(246, 238, 227, 0.42)),
-    url("factory-hero.png") center top / cover fixed;
+    url("factory-hero.png?v=20260607-3") center top / cover fixed;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -188,7 +188,7 @@ select {
   z-index: -1;
   background:
     linear-gradient(90deg, rgba(247, 251, 250, 0.7), rgba(247, 251, 250, 0.28) 58%, rgba(4, 124, 134, 0.08)),
-    url("factory-hero.png") center / cover no-repeat;
+    url("factory-hero.png?v=20260607-3") center / cover no-repeat;
   opacity: 1;
 }
 
@@ -458,7 +458,7 @@ h3 {
   overflow: hidden;
   background:
     linear-gradient(110deg, rgba(17, 32, 39, 0.58), rgba(4, 124, 134, 0.24)),
-    url("machining-floor.png") center / cover no-repeat;
+    url("machining-floor.png?v=20260607-3") center / cover no-repeat;
 }
 
 .band-content {
@@ -478,7 +478,7 @@ h3 {
   align-items: end;
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.78), rgba(237, 244, 242, 0.48)),
-    url("quality-lab.png") center / cover no-repeat;
+    url("quality-lab.png?v=20260607-3") center / cover no-repeat;
 }
 
 .sub-hero-inner {
@@ -496,7 +496,7 @@ h3 {
 .product-hero {
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.78), rgba(237, 244, 242, 0.4)),
-    url("machining-floor.png") center / cover no-repeat;
+    url("machining-floor.png?v=20260607-3") center / cover no-repeat;
 }
 
 .filter-bar {
@@ -880,7 +880,7 @@ select:focus {
   .hero-bg {
     background:
       linear-gradient(180deg, rgba(247, 251, 250, 0.84), rgba(247, 251, 250, 0.58)),
-      url("factory-hero.png") center / cover no-repeat;
+      url("factory-hero.png?v=20260607-3") center / cover no-repeat;
   }
 
   .hero-panel {
@@ -946,7 +946,7 @@ select:focus {
 body {
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.64), rgba(238, 246, 246, 0.34) 42%, rgba(246, 238, 227, 0.28)),
-    url("factory-hero.png") center top / cover fixed;
+    url("factory-hero.png?v=20260607-3") center top / cover fixed;
 }
 
 body::after {
@@ -979,7 +979,7 @@ body::after {
 .hero-bg {
   background:
     linear-gradient(90deg, rgba(247, 251, 250, 0.6), rgba(247, 251, 250, 0.18) 58%, rgba(4, 124, 134, 0.06)),
-    url("factory-hero.png") center / cover no-repeat;
+    url("factory-hero.png?v=20260607-3") center / cover no-repeat;
 }
 
 .hero-bg::after,
@@ -1045,19 +1045,19 @@ body::after {
 .industry-band {
   background:
     linear-gradient(110deg, rgba(17, 32, 39, 0.46), rgba(4, 124, 134, 0.16)),
-    url("machining-floor.png") center / cover no-repeat;
+    url("machining-floor.png?v=20260607-3") center / cover no-repeat;
 }
 
 .sub-hero {
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.58), rgba(237, 244, 242, 0.24)),
-    url("quality-lab.png") center / cover no-repeat;
+    url("quality-lab.png?v=20260607-3") center / cover no-repeat;
 }
 
 .product-hero {
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.58), rgba(237, 244, 242, 0.22)),
-    url("machining-floor.png") center / cover no-repeat;
+    url("machining-floor.png?v=20260607-3") center / cover no-repeat;
 }
 
 .hero-panel img,
@@ -1104,7 +1104,7 @@ body::after {
   .hero-bg {
     background:
       linear-gradient(180deg, rgba(247, 251, 250, 0.72), rgba(247, 251, 250, 0.42)),
-      url("factory-hero.png") center / cover no-repeat;
+      url("factory-hero.png?v=20260607-3") center / cover no-repeat;
   }
 
   .float-section {
@@ -1191,7 +1191,7 @@ body::after {
 .home-redesign {
   background:
     linear-gradient(115deg, rgba(248, 251, 251, 0.88), rgba(237, 244, 244, 0.62) 46%, rgba(250, 247, 241, 0.76)),
-    url("factory-hero.png") center top / cover fixed;
+    url("factory-hero.png?v=20260607-3") center top / cover fixed;
 }
 
 .home-header .brand {
