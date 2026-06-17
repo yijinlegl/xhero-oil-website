@@ -4,9 +4,10 @@
   --line: rgba(255, 255, 255, 0.58);
   --glass: rgba(255, 255, 255, 0.42);
   --glass-strong: rgba(255, 255, 255, 0.68);
-  --brand: #b9132d;
-  --brand-dark: #841424;
-  --teal: #047c86;
+  --brand: #126fae;
+  --brand-dark: #0d426b;
+  --brand-red: #c91f3d;
+  --teal: #0498b6;
   --steel: #435966;
   --mist: #eef5f4;
   --warm: #f6eee3;
@@ -27,8 +28,8 @@ body {
   min-width: 320px;
   color: var(--ink);
   background:
-    linear-gradient(115deg, rgba(247, 251, 250, 0.78), rgba(238, 246, 246, 0.52) 42%, rgba(246, 238, 227, 0.42)),
-    url("factory-hero.png?v=20260607-3") center top / cover fixed;
+    linear-gradient(115deg, rgba(247, 251, 252, 0.78), rgba(235, 247, 252, 0.52) 42%, rgba(226, 243, 250, 0.42)),
+    url("factory-hero.png?v=20260617-3") center top / cover fixed;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -55,8 +56,8 @@ body::after {
   z-index: 50;
   width: var(--scroll, 0%);
   height: 3px;
-  background: linear-gradient(90deg, rgba(185, 19, 45, 0.92), rgba(4, 124, 134, 0.92));
-  box-shadow: 0 0 18px rgba(4, 124, 134, 0.42);
+  background: linear-gradient(90deg, rgba(18, 111, 174, 0.94), rgba(4, 152, 182, 0.9));
+  box-shadow: 0 0 18px rgba(18, 111, 174, 0.36);
 }
 
 a {
@@ -102,6 +103,13 @@ select {
   min-width: 168px;
 }
 
+.brand-logo {
+  display: block;
+  width: clamp(152px, 13vw, 190px);
+  height: auto;
+  object-fit: contain;
+}
+
 .brand-mark {
   display: grid;
   width: 42px;
@@ -109,7 +117,10 @@ select {
   place-items: center;
   border-radius: 8px;
   color: #fff;
-  background: linear-gradient(145deg, var(--brand), var(--teal));
+  background:
+    linear-gradient(145deg, rgba(9, 77, 132, 0.98), rgba(5, 150, 183, 0.92)),
+    radial-gradient(circle at 25% 18%, rgba(255, 255, 255, 0.5), transparent 28%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32), 0 14px 32px rgba(18, 111, 174, 0.22);
   font-weight: 800;
 }
 
@@ -123,6 +134,19 @@ select {
   margin-top: 4px;
   color: var(--muted);
   font-size: 12px;
+}
+
+.brand-h {
+  color: var(--brand-red);
+  text-shadow: 0 0 14px rgba(201, 31, 61, 0.18);
+}
+
+.footer-logo {
+  display: block;
+  width: min(190px, 100%);
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 14px;
 }
 
 .main-nav {
@@ -188,7 +212,7 @@ select {
   z-index: -1;
   background:
     linear-gradient(90deg, rgba(247, 251, 250, 0.7), rgba(247, 251, 250, 0.28) 58%, rgba(4, 124, 134, 0.08)),
-    url("factory-hero.png?v=20260607-3") center / cover no-repeat;
+    url("factory-hero.png?v=20260617-3") center / cover no-repeat;
   opacity: 1;
 }
 
@@ -277,7 +301,7 @@ h3 {
 .btn.primary {
   color: #fff;
   background: linear-gradient(135deg, var(--brand), var(--teal));
-  box-shadow: 0 16px 36px rgba(185, 19, 45, 0.24);
+  box-shadow: 0 16px 36px rgba(18, 111, 174, 0.24);
 }
 
 .btn.ghost {
@@ -458,7 +482,7 @@ h3 {
   overflow: hidden;
   background:
     linear-gradient(110deg, rgba(17, 32, 39, 0.58), rgba(4, 124, 134, 0.24)),
-    url("machining-floor.png?v=20260607-3") center / cover no-repeat;
+    url("machining-floor.png?v=20260617-3") center / cover no-repeat;
 }
 
 .band-content {
@@ -478,7 +502,7 @@ h3 {
   align-items: end;
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.78), rgba(237, 244, 242, 0.48)),
-    url("quality-lab.png?v=20260607-3") center / cover no-repeat;
+    url("quality-lab.png?v=20260617-3") center / cover no-repeat;
 }
 
 .sub-hero-inner {
@@ -496,7 +520,7 @@ h3 {
 .product-hero {
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.78), rgba(237, 244, 242, 0.4)),
-    url("machining-floor.png?v=20260607-3") center / cover no-repeat;
+    url("machining-floor.png?v=20260617-3") center / cover no-repeat;
 }
 
 .filter-bar {
@@ -596,7 +620,7 @@ h3 {
 
 .lens-tabs button.active {
   color: #fff;
-  background: linear-gradient(135deg, rgba(185, 19, 45, 0.88), rgba(4, 124, 134, 0.88));
+  background: linear-gradient(135deg, rgba(18, 111, 174, 0.9), rgba(4, 152, 182, 0.86));
 }
 
 .lens-copy {
@@ -880,7 +904,7 @@ select:focus {
   .hero-bg {
     background:
       linear-gradient(180deg, rgba(247, 251, 250, 0.84), rgba(247, 251, 250, 0.58)),
-      url("factory-hero.png?v=20260607-3") center / cover no-repeat;
+      url("factory-hero.png?v=20260617-3") center / cover no-repeat;
   }
 
   .hero-panel {
@@ -946,7 +970,7 @@ select:focus {
 body {
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.64), rgba(238, 246, 246, 0.34) 42%, rgba(246, 238, 227, 0.28)),
-    url("factory-hero.png?v=20260607-3") center top / cover fixed;
+    url("factory-hero.png?v=20260617-3") center top / cover fixed;
 }
 
 body::after {
@@ -979,7 +1003,7 @@ body::after {
 .hero-bg {
   background:
     linear-gradient(90deg, rgba(247, 251, 250, 0.6), rgba(247, 251, 250, 0.18) 58%, rgba(4, 124, 134, 0.06)),
-    url("factory-hero.png?v=20260607-3") center / cover no-repeat;
+    url("factory-hero.png?v=20260617-3") center / cover no-repeat;
 }
 
 .hero-bg::after,
@@ -1045,19 +1069,19 @@ body::after {
 .industry-band {
   background:
     linear-gradient(110deg, rgba(17, 32, 39, 0.46), rgba(4, 124, 134, 0.16)),
-    url("machining-floor.png?v=20260607-3") center / cover no-repeat;
+    url("machining-floor.png?v=20260617-3") center / cover no-repeat;
 }
 
 .sub-hero {
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.58), rgba(237, 244, 242, 0.24)),
-    url("quality-lab.png?v=20260607-3") center / cover no-repeat;
+    url("quality-lab.png?v=20260617-3") center / cover no-repeat;
 }
 
 .product-hero {
   background:
     linear-gradient(115deg, rgba(247, 251, 250, 0.58), rgba(237, 244, 242, 0.22)),
-    url("machining-floor.png?v=20260607-3") center / cover no-repeat;
+    url("machining-floor.png?v=20260617-3") center / cover no-repeat;
 }
 
 .hero-panel img,
@@ -1104,7 +1128,7 @@ body::after {
   .hero-bg {
     background:
       linear-gradient(180deg, rgba(247, 251, 250, 0.72), rgba(247, 251, 250, 0.42)),
-      url("factory-hero.png?v=20260607-3") center / cover no-repeat;
+      url("factory-hero.png?v=20260617-3") center / cover no-repeat;
   }
 
   .float-section {
@@ -1190,8 +1214,8 @@ body::after {
 /* Xhero B2B homepage */
 .home-redesign {
   background:
-    linear-gradient(115deg, rgba(248, 251, 251, 0.88), rgba(237, 244, 244, 0.62) 46%, rgba(250, 247, 241, 0.76)),
-    url("factory-hero.png?v=20260607-3") center top / cover fixed;
+    linear-gradient(115deg, rgba(248, 251, 252, 0.9), rgba(232, 246, 252, 0.62) 46%, rgba(228, 243, 250, 0.72)),
+    url("factory-hero.png?v=20260617-3") center top / cover fixed;
 }
 
 .home-header .brand {
@@ -1216,8 +1240,8 @@ body::after {
 .home-header .main-nav .nav-cta {
   margin-left: 8px;
   color: #fff;
-  background: linear-gradient(135deg, rgba(185, 19, 45, 0.92), rgba(4, 124, 134, 0.9));
-  box-shadow: 0 14px 30px rgba(4, 124, 134, 0.16);
+  background: linear-gradient(135deg, rgba(18, 111, 174, 0.94), rgba(4, 152, 182, 0.88));
+  box-shadow: 0 14px 30px rgba(18, 111, 174, 0.18);
 }
 
 .brand-hero {

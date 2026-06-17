@@ -112,14 +112,14 @@ const productData = {
     copy: "用于机床导轨、滑动面、工作台及液压与导轨共用润滑系统，覆盖 32 / 46 / 68 / 100 / 220 等粘度等级。",
     points: ["典型应用：机床导轨与滑动面", "粘度等级：32 / 46 / 68 / 100 / 220", "客户价值：平稳运行、减摩保护、维护清晰"],
   },
-  DuraGuide: {
-    type: "工业油品",
-    title: "DuraGuide 导轨油产品说明书",
-    copy: "面向机床导轨、工作台、立柱、横梁以及相关润滑系统，覆盖多种导轨润滑工况。",
-    points: ["产品型号：32 / 46 / 68 / 100", "应用部位：导轨、工作台、滑动面", "资料内容：产品说明、应用范围、储存方式"],
+  Duramult: {
+    type: "设备用油",
+    title: "Duramult 主轴油系列",
+    copy: "面向高速主轴、精密轴承和轻负荷高速润滑部位，强调低摩擦、良好油膜稳定性和设备洁净维护。",
+    points: ["典型应用：机床主轴、精密轴承、高速轻负荷润滑点", "工况特点：高转速、低负荷、温升控制和低噪声运行", "客户价值：稳定油膜、降低温升、支持主轴长期精密运行"],
   },
   DuraKnit: {
-    type: "工业油品",
+    type: "针织机油",
     title: "DuraKnit 针织机油",
     copy: "面向针织设备润滑维护，服务纺织设备连续运行与日常保养。",
     points: ["应用方向：纺织与针织设备", "服务内容：润滑维护与资料支持", "客户价值：稳定运行、减少磨损、维护便利"],
@@ -133,14 +133,18 @@ const productData = {
   Tomo: {
     type: "金属加工液",
     title: "Tomo 金属加工液系列",
-    copy: "包含 TomoLube 油基切削油、TomoCool 水基冷却液、TomoSyn 半合成切削液。",
-    points: ["TomoLube：32 / 46 / 68 / 100 / 220", "TomoCool：3% / 5% / 8% / 10%", "TomoSyn：5% / 8% / 10%"],
+    copy: "包含 TomoCut 油基切削油、TomoCool 水基冷却液、TomoForm 成型油，覆盖切削、冷却清洗与塑性成型等加工工况。",
+    points: [
+      "TomoCut：适用于车削、铣削、钻孔、攻丝等中重负荷切削加工",
+      "TomoCool：适用于集中供液、磨削、轻中负荷切削及冷却清洗要求较高的工况",
+      "TomoForm：适用于冲压、拉伸、弯管、滚压等金属成型与塑性加工"
+    ],
   },
-  "Anti-Ios": {
+  "Anti-ios": {
     type: "防锈保护",
-    title: "Anti-Ios 防锈油系列",
+    title: "Anti-ios 防锈油系列",
     copy: "可扩展 Dura 长效、Shield 硬膜、Dry 脱水等防锈油方向。",
-    points: ["Anti-Ios：通用防锈油", "Anti-Ios Dura：长效防锈油", "Anti-Ios Shield：硬膜防锈油", "Anti-Ios Dry：脱水防锈油"],
+    points: ["Anti-ios：通用防锈油", "Anti-ios Dura：长效防锈油", "Anti-ios Shield：硬膜防锈油", "Anti-ios Dry：脱水防锈油"],
   },
 };
 
@@ -178,10 +182,10 @@ document.querySelectorAll("[data-tab]").forEach((button) => {
 });
 
 const lensData = {
-  machine: ["Machine Tool", "DuraSlide / DuraGuide 导轨润滑", "适用于机床导轨、滑动面、工作台和低速重载工况，帮助设备保持平稳运行。", "assets/machining-floor.png", "机床导轨与精密加工设备"],
+  machine: ["Machine Tool", "DuraSlide 导轨润滑", "适用于机床导轨、滑动面、工作台和低速重载工况，帮助设备保持平稳运行。", "assets/machining-floor.png", "机床导轨与精密加工设备"],
   hydraulic: ["Hydraulic System", "DuraHyd 抗磨液压系统", "面向液压站、泵阀系统和工业设备传动部位，强调抗磨保护与稳定运行。", "assets/factory-hero.png", "现代液压与加工设备"],
   textile: ["Textile Equipment", "DuraKnit 针织设备维护", "服务针织机、传动部位和长期连续运行设备，支持纺织行业日常维护。", "assets/quality-lab.png", "润滑油检测与设备维护环境"],
-  protection: ["Rust Protection", "Anti-Ios 防锈保护", "围绕金属部件仓储、运输和加工间隔期保护，提供防锈与表面保护方向。", "assets/machining-floor.png", "金属部件与防护工况"],
+  protection: ["Rust Protection", "Anti-ios 防锈保护", "围绕金属部件仓储、运输和加工间隔期保护，提供防锈与表面保护方向。", "assets/machining-floor.png", "金属部件与防护工况"],
 };
 
 document.querySelectorAll("[data-lens]").forEach((button) => {
