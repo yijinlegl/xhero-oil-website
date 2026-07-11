@@ -3,15 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="希罗工业润滑产品中心，涵盖工业齿轮油、抗磨液压油、导轨油、主轴油、针织机油、润滑脂、金属加工液与防锈油。" />
+    <meta name="theme-color" content="#f5fafc" />
+    <link rel="canonical" href="https://xhero-oil.com.cn/products/" />
+    <link rel="icon" type="image/png" href="../assets/xhero-logo.png?v=20260710-1" />
     <title>产品中心 | Xhero</title>
-    <link rel="stylesheet" href="../assets/site.css?v=20260617-3" />
+    <link rel="stylesheet" href="../assets/site.css?v=20260711-11" />
   </head>
   <body data-page="products">
     <header class="site-header">
-      <a class="brand" href="../index.html"><img class="brand-logo" src="../assets/xhero-logo.png?v=20260617-3" alt="Xhero 希罗石化" /></a>
+      <a class="brand" href="../index.html"><img class="brand-logo" src="../assets/xhero-logo.png?v=20260710-1" alt="Xhero 希罗石化" /></a>
       <button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false"><span></span><span></span></button>
       <nav class="main-nav" aria-label="主导航">
-        <a href="../index.html">首页</a><a href="../products/index.html">产品中心</a><a href="../industries/index.html">应用行业</a><a href="../about/index.html">关于我们</a><a href="../contact/index.html">联系我们</a>
+        <a href="../index.html">首页</a><a href="../products/index.html">产品中心</a><a href="../industries/index.html">应用行业</a><a href="../about/index.html">关于我们</a><a href="../contact/index.html">联系我们</a><a class="nav-cta" href="../contact/index.html">获取方案</a>
       </nav>
     </header>
     <main>
@@ -19,58 +23,78 @@
         <div class="sub-hero-inner reveal">
           <p class="eyebrow">Product Center</p>
           <h1>产品中心</h1>
-          <p>按设备用油、针织机油、金属加工液、润滑脂和防锈保护组织内容，帮助客户快速完成选型、比对与资料获取。</p>
+          <p>按工业齿轮油、设备用油、针织机油、金属加工液、润滑脂和防锈保护组织内容，帮助客户快速完成选型、比对与资料获取。</p>
         </div>
       </section>
-      <section class="section">
+      <section class="section product-catalog-section">
         <div class="filter-bar glass reveal" role="tablist" aria-label="产品分类">
-          <button class="active" type="button" data-filter="all">全部</button>
-          <button type="button" data-filter="equipment">设备用油</button>
-          <button type="button" data-filter="knit">针织机油</button>
-          <button type="button" data-filter="metalworking">金属加工液</button>
-          <button type="button" data-filter="grease">润滑脂</button>
-          <button type="button" data-filter="rust">防锈油</button>
+          <button class="active" type="button" role="tab" aria-selected="true" aria-controls="product-grid" data-filter="all">全部</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="product-grid" data-filter="gear">工业齿轮油</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="product-grid" data-filter="equipment">设备用油</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="product-grid" data-filter="knit">针织机油</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="product-grid" data-filter="metalworking">金属加工液</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="product-grid" data-filter="grease">润滑脂</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="product-grid" data-filter="rust">防锈油</button>
           <label class="product-search">搜索产品<input type="search" data-product-search placeholder="输入 Duramult / 液压油 / 金属加工液" /></label>
         </div>
-        <div class="product-grid">
+        <p class="filter-result" data-filter-result role="status" aria-live="polite">显示全部 8 项产品</p>
+        <div class="product-grid" id="product-grid">
+          <article class="catalog-card glass reveal tilt-card" data-category="gear">
+            <img src="../assets/industry-wind.webp?v=20260710-1" alt="工业齿轮箱与重载传动系统" loading="lazy" decoding="async" />
+            <div><span>Industrial Gear Oil</span><h2>工业齿轮油</h2><p>面向封闭式工业齿轮箱、减速机及重载传动系统，支持高负荷、冲击负荷和长周期运行工况的润滑保护。</p><button type="button" data-product="GearOil">查看详情</button></div>
+          </article>
           <article class="catalog-card glass reveal tilt-card" data-category="equipment">
-            <img src="../assets/machining-floor.png?v=20260617-3" alt="液压设备与机加工现场" />
+            <img src="../assets/machining-floor.webp?v=20260710-1" alt="液压设备与机加工现场" loading="lazy" decoding="async" />
             <div><span>DuraHyd</span><h2>抗磨液压油</h2><p>适用于液压站、注塑机、工程机械和通用液压系统，兼顾抗磨保护与运行稳定性。</p><button type="button" data-product="DuraHyd">查看详情</button></div>
           </article>
           <article class="catalog-card glass reveal tilt-card" data-category="equipment">
-            <img src="../assets/factory-hero.png?v=20260617-3" alt="现代机床加工设备" />
+            <img src="../assets/factory-hero.webp?v=20260710-1" alt="现代机床加工设备" loading="lazy" decoding="async" />
             <div><span>DuraSlide</span><h2>导轨油</h2><p>面向机床导轨、滑动面和工作台润滑，帮助降低爬行、磨损和加工精度波动。</p><button type="button" data-product="DuraSlide">查看详情</button></div>
           </article>
           <article class="catalog-card glass reveal tilt-card" data-category="equipment">
-            <img src="../assets/factory-hero.png?v=20260617-3" alt="高速主轴与精密加工设备" />
+            <img src="../assets/factory-hero.webp?v=20260710-1" alt="高速主轴与精密加工设备" loading="lazy" decoding="async" />
             <div><span>Duramult</span><h2>主轴油系列</h2><p>参考高速主轴与精密轴承润滑需求开发，适用于机床主轴、精密轴承和高速轻负荷润滑部位。</p><button type="button" data-product="Duramult">查看详情</button></div>
           </article>
           <article class="catalog-card glass reveal tilt-card" data-category="knit">
-            <img src="../assets/quality-lab.png?v=20260617-3" alt="润滑油检测与设备维护环境" />
+            <img src="../assets/quality-lab.webp?v=20260710-1" alt="润滑油检测与设备维护环境" loading="lazy" decoding="async" />
             <div><span>DuraKnit</span><h2>针织机油</h2><p>适用于针织机、针床、传动部位和长期连续运行设备，关注清洁润滑与稳定维护。</p><button type="button" data-product="DuraKnit">查看详情</button></div>
           </article>
           <article class="catalog-card glass reveal tilt-card" data-category="grease">
-            <img src="../assets/quality-lab.png?v=20260617-3" alt="润滑脂与实验室检测设备" />
-            <div><span>XheroGel</span><h2>润滑脂系列</h2><p>覆盖高温、重载、低温、高速、防水等润滑场景，适配轴承、齿轮和集中润滑系统。</p><button type="button" data-product="XheroGel">查看详情</button></div>
+            <img src="../assets/quality-lab.webp?v=20260710-1" alt="润滑脂与实验室检测设备" loading="lazy" decoding="async" />
+            <div><span>XheroGel</span><h2>润滑脂系列</h2><p>面向轴承、电机、齿轮及集中润滑系统，覆盖高温、极压、低温、高速、防水与食品级等典型工况。</p><button type="button" data-product="XheroGel">查看详情</button></div>
           </article>
           <article class="catalog-card glass reveal tilt-card" data-category="metalworking">
-            <img src="../assets/factory-hero.png?v=20260617-3" alt="金属加工车间设备" />
+            <img src="../assets/factory-hero.webp?v=20260710-1" alt="金属加工车间设备" loading="lazy" decoding="async" />
             <div><span>Tomo</span><h2>金属加工液系列</h2><p>TomoCut 油基切削油、TomoCool 水基冷却液、TomoForm 成型油，覆盖切削、冷却清洗与塑性成型等加工工况。</p><button type="button" data-product="Tomo">查看详情</button></div>
           </article>
           <article class="catalog-card glass reveal tilt-card" data-category="rust">
-            <img src="../assets/machining-floor.png?v=20260617-3" alt="金属部件与防护工况" />
-            <div><span>Anti-ios</span><h2>防锈油系列</h2><p>产品方向：通用、长效、硬膜、脱水等防锈保护。</p><button type="button" data-product="Anti-ios">查看详情</button></div>
+            <img src="../assets/machining-floor.webp?v=20260710-1" alt="金属部件与防护工况" loading="lazy" decoding="async" />
+            <div><span>Anti-ios</span><h2>防锈油系列</h2><p>面向工序间防护、仓储及运输场景，提供油膜、硬膜、脱水与长效防锈解决方案。</p><button type="button" data-product="Anti-ios">查看详情</button></div>
           </article>
         </div>
       </section>
+      <section class="brand-cta">
+        <div class="brand-cta__inner reveal">
+          <div><p class="eyebrow">Product Selection</p><h2>需要结合设备工况进一步确认产品？</h2><p>提供设备型号、运行温度、负荷特征、现用油品与维护目标，便于更准确地判断产品方向。</p></div>
+          <div class="brand-cta__actions"><a class="btn primary" href="../contact/index.html">提交选型需求</a><a href="mailto:marketing@xhero-oil.com.cn">marketing@xhero-oil.com.cn</a></div>
+        </div>
+      </section>
     </main>
-    <dialog class="product-dialog">
+    <dialog class="product-dialog" aria-labelledby="product-dialog-title" aria-describedby="product-dialog-copy">
       <button type="button" class="dialog-close" aria-label="关闭">×</button>
       <p class="eyebrow dialog-kicker"></p>
-      <h2></h2>
-      <p></p>
+      <h2 id="product-dialog-title"></h2>
+      <p id="product-dialog-copy"></p>
       <ul></ul>
+      <a class="btn primary dialog-action" data-product-enquiry href="../contact/">咨询该产品</a>
     </dialog>
-    <script src="../assets/site.js?v=20260617-3"></script>
+    <footer class="site-footer subpage-footer">
+      <div><img class="footer-logo" src="../assets/xhero-logo-white.png?v=20260710-1" alt="Xhero 希罗石化" /><p>上海希罗石油化工有限公司，工业润滑油、润滑脂、金属加工液、防锈油及应用支持。</p></div>
+      <div><h4>产品分类</h4><a href="../products/?category=gear">工业齿轮油</a><a href="../products/?category=equipment">设备用油</a><a href="../products/?category=knit">针织机油</a><a href="../products/?category=metalworking">金属加工液</a><a href="../products/?category=grease">润滑脂</a><a href="../products/?category=rust">防锈油</a></div>
+      <div><h4>应用行业</h4><a href="../industries/index.html">风电设备</a><a href="../industries/index.html">精密制造</a><a href="../industries/index.html">人形机器人</a><a href="../industries/index.html">电子化学品</a></div>
+      <div><h4>联系方式</h4><a href="mailto:marketing@xhero-oil.com.cn">marketing@xhero-oil.com.cn</a><a href="../contact/index.html">上海市青浦区胜利路1358号</a></div>
+      <p class="copyright">© 2026 上海希罗石油化工有限公司. All rights reserved.</p>
+    </footer>
+    <script src="../assets/site.js?v=20260711-11"></script>
   </body>
 </html>

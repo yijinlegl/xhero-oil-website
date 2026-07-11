@@ -32,7 +32,7 @@ createServer(async (req, res) => {
     res.end(body);
   } catch {
     try {
-      const body = await readFile(join(root, "index.html"));
+      const body = await readFile(join(root, "404.html"));
       res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
       res.end(body);
     } catch {

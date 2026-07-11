@@ -1,51 +1,84 @@
 const nav = document.querySelector(".main-nav");
 const toggle = document.querySelector(".menu-toggle");
 const header = document.querySelector(".site-header");
-const page = document.body.dataset.page || "home";
 const progress = document.createElement("div");
 progress.className = "scroll-progress";
 document.body.prepend(progress);
-
-const pathMap = {
-  home: "index.html",
-  about: "about/index.html",
-  products: "products/index.html",
-  industries: "industries/index.html",
-  support: "support/index.html",
-  cases: "cases/index.html",
-  contact: "contact/index.html",
-};
+const backToTop = document.createElement("button");
+backToTop.className = "back-to-top";
+backToTop.type = "button";
+backToTop.setAttribute("aria-label", "返回页面顶部");
+backToTop.textContent = "↑";
+document.body.append(backToTop);
 
 document.querySelectorAll("main > section").forEach((section, index) => {
   section.classList.add("float-section");
   section.style.setProperty("--section-shift", `${index % 2 === 0 ? -1 : 1}`);
 });
 
+const normalizePagePath = (value) => {
+  const pathname = new URL(value, window.location.href).pathname;
+  return pathname.replace(/\/index\.html$/, "").replace(/\/$/, "") || "/";
+};
+
+const currentPagePath = normalizePagePath(window.location.href);
+
 document.querySelectorAll(".main-nav a").forEach((link) => {
-  const href = link.getAttribute("href") || "";
-  const target = pathMap[page];
-  if (href.endsWith(target) || (page === "home" && href.endsWith("index.html"))) link.classList.add("active");
+  if (link.classList.contains("nav-cta")) return;
+  if (normalizePagePath(link.href) === currentPagePath) {
+    link.classList.add("active");
+    link.setAttribute("aria-current", "page");
+  }
 });
 
-toggle?.addEventListener("click", () => {
-  const open = nav?.classList.toggle("open");
-  toggle.setAttribute("aria-expanded", String(Boolean(open)));
+function setMobileNav(open) {
+  nav?.classList.toggle("open", open);
+  toggle?.setAttribute("aria-expanded", String(open));
+  toggle?.setAttribute("aria-label", open ? "关闭导航" : "打开导航");
+  document.body.classList.toggle("nav-open", open);
+}
+
+toggle?.addEventListener("click", () => setMobileNav(!nav?.classList.contains("open")));
+
+nav?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setMobileNav(false));
 });
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("visible");
-      revealObserver.unobserve(entry.target);
-    });
-  },
-  { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
-);
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" || !nav?.classList.contains("open")) return;
+  setMobileNav(false);
+  toggle?.focus();
+});
 
-document.querySelectorAll(".reveal, .float-section").forEach((el, index) => {
+document.addEventListener("pointerdown", (event) => {
+  if (!nav?.classList.contains("open") || header?.contains(event.target)) return;
+  setMobileNav(false);
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 920 && nav?.classList.contains("open")) setMobileNav(false);
+});
+
+const revealTargets = [...document.querySelectorAll(".reveal, .float-section")];
+const revealObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.06, rootMargin: "0px 0px 10% 0px" }
+    )
+  : null;
+
+revealTargets.forEach((el, index) => {
   el.style.setProperty("--delay", `${Math.min(index % 7, 5) * 70}ms`);
-  revealObserver.observe(el);
+  const rect = el.getBoundingClientRect();
+  const startsInViewport = rect.top <= window.innerHeight * 1.05 && rect.bottom >= 0;
+  if (!revealObserver || startsInViewport) el.classList.add("visible");
+  else revealObserver.observe(el);
 });
 
 const countObserver = new IntersectionObserver(
@@ -72,34 +105,126 @@ function updateMotion() {
   const max = document.documentElement.scrollHeight - window.innerHeight;
   const value = max > 0 ? (window.scrollY / max) * 100 : 0;
   document.documentElement.style.setProperty("--scroll", `${value}%`);
+  document.documentElement.style.setProperty("--hero-shift", `${Math.min(window.scrollY * 0.035, 24)}px`);
   header?.classList.toggle("is-scrolled", window.scrollY > 24);
+  backToTop.classList.toggle("visible", window.scrollY > 720);
 }
 
 window.addEventListener("scroll", updateMotion, { passive: true });
 updateMotion();
 
-function applyProductFilter() {
-  const active = document.querySelector("[data-filter].active")?.dataset.filter || "all";
-  const query = (document.querySelector("[data-product-search]")?.value || "").trim().toLowerCase();
-  document.querySelectorAll(".catalog-card").forEach((card) => {
-    const category = card.dataset.category || "";
-    const matchesFilter = active === "all" || category.includes(active);
-    const matchesQuery = !query || card.textContent.toLowerCase().includes(query);
-    card.classList.toggle("is-hidden", !matchesFilter || !matchesQuery);
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+const productFilterButtons = [...document.querySelectorAll("[data-filter]")];
+const productCards = [...document.querySelectorAll(".product-catalog-section .catalog-card")];
+const productSearch = document.querySelector("[data-product-search]");
+const productGrid = document.querySelector("#product-grid");
+
+function setProductFilter(button) {
+  if (!button) return;
+  productFilterButtons.forEach((item) => {
+    const selected = item === button;
+    item.classList.toggle("active", selected);
+    item.setAttribute("aria-selected", String(selected));
+    item.tabIndex = selected ? 0 : -1;
   });
 }
 
-document.querySelectorAll("[data-filter]").forEach((button) => {
+function updateProductUrl({ productKey, mode = "replace", dialogEntry } = {}) {
+  if (!productFilterButtons.length) return;
+  const url = new URL(window.location.href);
+  const activeButton = productFilterButtons.find((button) => button.getAttribute("aria-selected") === "true");
+  const category = activeButton?.dataset.filter || "all";
+  const query = (productSearch?.value || "").trim();
+
+  if (category === "all") url.searchParams.delete("category");
+  else url.searchParams.set("category", category);
+  if (query) url.searchParams.set("q", query);
+  else url.searchParams.delete("q");
+  if (productKey !== undefined) {
+    if (productKey) url.searchParams.set("product", productKey);
+    else url.searchParams.delete("product");
+  }
+
+  const currentState = history.state && typeof history.state === "object" ? history.state : {};
+  const nextState = dialogEntry === undefined ? currentState : { ...currentState, xheroProductDialog: dialogEntry };
+  const method = mode === "push" ? "pushState" : "replaceState";
+  history[method](nextState, "", url);
+}
+
+function applyProductFilter() {
+  const activeButton = productFilterButtons.find((button) => button.getAttribute("aria-selected") === "true");
+  const active = activeButton?.dataset.filter || "all";
+  const query = (productSearch?.value || "").trim().toLocaleLowerCase("zh-CN");
+  let visibleCount = 0;
+  productCards.forEach((card) => {
+    const categories = (card.dataset.category || "").split(/\s+/).filter(Boolean);
+    const matchesFilter = active === "all" || categories.includes(active);
+    const matchesQuery = !query || card.textContent.toLocaleLowerCase("zh-CN").includes(query);
+    const hidden = !matchesFilter || !matchesQuery;
+    card.classList.toggle("is-hidden", hidden);
+    card.toggleAttribute("hidden", hidden);
+    if (!hidden) visibleCount += 1;
+  });
+
+  const result = document.querySelector("[data-filter-result]");
+  if (result) {
+    const label = active === "all" ? "全部" : activeButton?.textContent.trim() || "当前分类";
+    result.textContent = query
+      ? `“${query}”共找到 ${visibleCount} 项产品`
+      : `显示${label} ${visibleCount} 项产品`;
+  }
+}
+
+productFilterButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    document.querySelectorAll("[data-filter]").forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
+    setProductFilter(button);
     applyProductFilter();
+    updateProductUrl();
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      productGrid?.animate(
+        [{ opacity: 0.62, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }],
+        { duration: 260, easing: "ease-out" }
+      );
+    }
+  });
+
+  button.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const currentIndex = productFilterButtons.indexOf(button);
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (currentIndex + direction + productFilterButtons.length) % productFilterButtons.length;
+    productFilterButtons[nextIndex].focus();
+    productFilterButtons[nextIndex].click();
   });
 });
 
-document.querySelector("[data-product-search]")?.addEventListener("input", applyProductFilter);
+const initialProductParams = new URLSearchParams(window.location.search);
+const requestedCategory = initialProductParams.get("category") || "all";
+const initialFilterButton = productFilterButtons.find((button) => button.dataset.filter === requestedCategory)
+  || productFilterButtons.find((button) => button.dataset.filter === "all");
+setProductFilter(initialFilterButton);
+if (productSearch) productSearch.value = initialProductParams.get("q") || "";
+productSearch?.addEventListener("input", () => {
+  applyProductFilter();
+  updateProductUrl();
+});
+applyProductFilter();
 
 const productData = {
+  GearOil: {
+    type: "设备传动润滑",
+    title: "工业齿轮油",
+    copy: "面向封闭式工业齿轮箱、减速机及重载传动系统，重点满足齿面抗磨、承载保护、氧化稳定与长期运行需求。选型需综合设备制造商要求、粘度等级、负荷特征、工作温度和维护周期。",
+    points: [
+      "典型应用：风电齿轮箱、工业减速机、输送设备及重载传动装置",
+      "工况关注：高负荷、冲击负荷、温度变化、污染控制与长周期运行",
+      "选型依据：设备要求、粘度等级、负荷、温度、密封适配与换油周期"
+    ],
+  },
   DuraHyd: {
     type: "工业油品",
     title: "DuraHyd 抗磨液压油",
@@ -125,10 +250,14 @@ const productData = {
     points: ["应用方向：纺织与针织设备", "服务内容：润滑维护与资料支持", "客户价值：稳定运行、减少磨损、维护便利"],
   },
   XheroGel: {
-    type: "润滑脂系列",
+    type: "工业润滑脂",
     title: "XheroGel 润滑脂系列",
-    copy: "可按 HT、EP、LT、HS、FG、WP、XD、LX、PX 等后缀扩展不同润滑脂方向。",
-    points: ["HT = High Temperature 高温", "EP = Extreme Pressure 极压", "FG = Food Grade 食品级", "WP = Water Proof 防水"],
+    copy: "面向轴承、电机、齿轮及集中润滑系统的多样化工况，产品覆盖高温、极压、低温、高速、防水及食品级等应用方向。可结合工作温度、转速、负荷、介质环境和补脂周期进行针对性选型。",
+    points: [
+      "典型应用：滚动轴承、滑动轴承、电机、齿轮及集中润滑系统",
+      "工况覆盖：高温、极压、低温、高速、防水、食品级及长寿命润滑",
+      "选型依据：温度、转速、负荷、密封结构、介质接触与维护周期"
+    ],
   },
   Tomo: {
     type: "金属加工液",
@@ -143,25 +272,84 @@ const productData = {
   "Anti-ios": {
     type: "防锈保护",
     title: "Anti-ios 防锈油系列",
-    copy: "可扩展 Dura 长效、Shield 硬膜、Dry 脱水等防锈油方向。",
-    points: ["Anti-ios：通用防锈油", "Anti-ios Dura：长效防锈油", "Anti-ios Shield：硬膜防锈油", "Anti-ios Dry：脱水防锈油"],
+    copy: "针对金属零部件工序间防护、库存保管及运输过程中的锈蚀风险，提供油膜型、硬膜型、脱水型及长效防锈解决方案。可结合金属材质、防护周期、环境湿度、包装方式和后续清洗要求进行选型。",
+    points: [
+      "典型应用：机加工件、汽车零部件、模具、工具及金属半成品",
+      "防护方向：工序间防锈、仓储防锈、运输包装、脱水置换与硬膜保护",
+      "选型依据：材质、湿度、盐雾环境、防护周期、膜层要求与后续清洗"
+    ],
   },
 };
 
 const dialog = document.querySelector(".product-dialog");
+let productDialogOpener = null;
+
+function openProductDialog(productKey, { pushHistory = false, opener = null } = {}) {
+  const data = productData[productKey || ""];
+  if (!data || !dialog) return false;
+  dialog.querySelector(".dialog-kicker").textContent = data.type;
+  dialog.querySelector("h2").textContent = data.title;
+  dialog.querySelector("p:not(.eyebrow)").textContent = data.copy;
+  dialog.querySelector("ul").innerHTML = data.points.map((item) => `<li>${item}</li>`).join("");
+  const enquiryLink = dialog.querySelector("[data-product-enquiry]");
+  if (enquiryLink) enquiryLink.href = `../contact/?product=${encodeURIComponent(productKey)}`;
+  dialog.dataset.product = productKey;
+  productDialogOpener = opener;
+  if (!dialog.open) dialog.showModal();
+  if (pushHistory) updateProductUrl({ productKey, mode: "push", dialogEntry: true });
+  return true;
+}
+
+function closeProductDialog({ fromHistory = false } = {}) {
+  if (!dialog) return;
+  if (!fromHistory && history.state?.xheroProductDialog) {
+    history.back();
+    return;
+  }
+  if (dialog.open) dialog.close();
+  delete dialog.dataset.product;
+  if (!fromHistory) updateProductUrl({ productKey: null, dialogEntry: false });
+  productDialogOpener?.focus();
+  productDialogOpener = null;
+}
+
 document.querySelectorAll("[data-product]").forEach((button) => {
+  button.setAttribute("aria-haspopup", "dialog");
   button.addEventListener("click", () => {
-    const data = productData[button.dataset.product || ""];
-    if (!data || !dialog) return;
-    dialog.querySelector(".dialog-kicker").textContent = data.type;
-    dialog.querySelector("h2").textContent = data.title;
-    dialog.querySelector("p:not(.eyebrow)").textContent = data.copy;
-    dialog.querySelector("ul").innerHTML = data.points.map((item) => `<li>${item}</li>`).join("");
-    dialog.showModal();
+    openProductDialog(button.dataset.product, { pushHistory: true, opener: button });
   });
 });
 
-document.querySelector(".dialog-close")?.addEventListener("click", () => dialog?.close());
+document.querySelector(".dialog-close")?.addEventListener("click", () => closeProductDialog());
+dialog?.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeProductDialog();
+});
+dialog?.addEventListener("click", (event) => {
+  if (event.target === dialog) closeProductDialog();
+});
+
+function restoreProductStateFromUrl() {
+  if (!productFilterButtons.length) return;
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get("category") || "all";
+  const filterButton = productFilterButtons.find((button) => button.dataset.filter === category)
+    || productFilterButtons.find((button) => button.dataset.filter === "all");
+  setProductFilter(filterButton);
+  if (productSearch) productSearch.value = params.get("q") || "";
+  applyProductFilter();
+
+  const productKey = params.get("product");
+  if (productKey && productData[productKey]) openProductDialog(productKey);
+  else closeProductDialog({ fromHistory: true });
+}
+
+if (productFilterButtons.length) {
+  const initialProductKey = initialProductParams.get("product");
+  history.replaceState({ ...(history.state || {}), xheroProductDialog: false }, "", window.location.href);
+  if (initialProductKey && productData[initialProductKey]) openProductDialog(initialProductKey);
+  window.addEventListener("popstate", restoreProductStateFromUrl);
+}
 
 const supportContent = {
   tds: ["TDS 产品说明书", "用于向客户说明产品用途、主要性能、典型数据、应用范围和储存方式，帮助客户快速完成初步判断。"],
@@ -182,10 +370,10 @@ document.querySelectorAll("[data-tab]").forEach((button) => {
 });
 
 const lensData = {
-  machine: ["Machine Tool", "DuraSlide 导轨润滑", "适用于机床导轨、滑动面、工作台和低速重载工况，帮助设备保持平稳运行。", "assets/machining-floor.png", "机床导轨与精密加工设备"],
-  hydraulic: ["Hydraulic System", "DuraHyd 抗磨液压系统", "面向液压站、泵阀系统和工业设备传动部位，强调抗磨保护与稳定运行。", "assets/factory-hero.png", "现代液压与加工设备"],
-  textile: ["Textile Equipment", "DuraKnit 针织设备维护", "服务针织机、传动部位和长期连续运行设备，支持纺织行业日常维护。", "assets/quality-lab.png", "润滑油检测与设备维护环境"],
-  protection: ["Rust Protection", "Anti-ios 防锈保护", "围绕金属部件仓储、运输和加工间隔期保护，提供防锈与表面保护方向。", "assets/machining-floor.png", "金属部件与防护工况"],
+  machine: ["Machine Tool", "DuraSlide 导轨润滑", "适用于机床导轨、滑动面、工作台和低速重载工况，帮助设备保持平稳运行。", "assets/machining-floor.webp", "机床导轨与精密加工设备"],
+  hydraulic: ["Hydraulic System", "DuraHyd 抗磨液压系统", "面向液压站、泵阀系统和工业设备传动部位，强调抗磨保护与稳定运行。", "assets/factory-hero.webp", "现代液压与加工设备"],
+  textile: ["Textile Equipment", "DuraKnit 针织设备维护", "服务针织机、传动部位和长期连续运行设备，支持纺织行业日常维护。", "assets/quality-lab.webp", "润滑油检测与设备维护环境"],
+  protection: ["Rust Protection", "Anti-ios 防锈保护", "围绕金属部件仓储、运输和加工间隔期保护，提供防锈与表面保护方向。", "assets/machining-floor.webp", "金属部件与防护工况"],
 };
 
 document.querySelectorAll("[data-lens]").forEach((button) => {
@@ -229,9 +417,30 @@ document.querySelector(".drawer-close")?.addEventListener("click", () => {
   drawer?.setAttribute("aria-hidden", "true");
 });
 
-document.querySelectorAll("[data-fake-submit]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const note = button.parentElement?.querySelector(".form-note") || document.querySelector(".form-note");
-    if (note) note.textContent = "咨询摘要已生成，可用于销售与技术团队跟进。";
+const contactProductSelect = document.querySelector('select[name="product"]');
+if (contactProductSelect) {
+  const requestedProduct = new URLSearchParams(window.location.search).get("product");
+  const hasRequestedProduct = [...contactProductSelect.options].some((option) => option.value === requestedProduct);
+  if (hasRequestedProduct) contactProductSelect.value = requestedProduct;
+}
+
+document.querySelectorAll("[data-email-submit]").forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const productField = form.querySelector('select[name="product"]');
+    const productLabel = productField?.selectedOptions?.[0]?.textContent.trim() || "工业润滑产品";
+    const subject = `网站咨询｜${data.get("company") || "客户"}｜${productLabel}`;
+    const body = [
+      `姓名：${data.get("name") || "未填写"}`,
+      `公司：${data.get("company") || "未填写"}`,
+      `关注产品：${productLabel}`,
+      "",
+      "需求说明：",
+      String(data.get("requirement") || "未填写"),
+    ].join("\n");
+    window.location.href = `mailto:marketing@xhero-oil.com.cn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const note = form.querySelector(".form-note");
+    if (note) note.textContent = "已打开邮件应用，请确认内容后发送。";
   });
 });

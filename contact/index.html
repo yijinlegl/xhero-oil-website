@@ -3,15 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="联系上海希罗石油化工有限公司，获取工业润滑产品资料、选型建议、样品沟通与商务支持。" />
+    <meta name="theme-color" content="#f5fafc" />
+    <link rel="canonical" href="https://xhero-oil.com.cn/contact/" />
+    <link rel="icon" type="image/png" href="../assets/xhero-logo.png?v=20260710-1" />
     <title>联系我们 | Xhero</title>
-    <link rel="stylesheet" href="../assets/site.css?v=20260617-3" />
+    <link rel="stylesheet" href="../assets/site.css?v=20260711-11" />
   </head>
   <body data-page="contact">
     <header class="site-header">
-      <a class="brand" href="../index.html"><img class="brand-logo" src="../assets/xhero-logo.png?v=20260617-3" alt="Xhero 希罗石化" /></a>
+      <a class="brand" href="../index.html"><img class="brand-logo" src="../assets/xhero-logo.png?v=20260710-1" alt="Xhero 希罗石化" /></a>
       <button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false"><span></span><span></span></button>
       <nav class="main-nav" aria-label="主导航">
-        <a href="../index.html">首页</a><a href="../products/index.html">产品中心</a><a href="../industries/index.html">应用行业</a><a href="../about/index.html">关于我们</a><a href="../contact/index.html">联系我们</a>
+        <a href="../index.html">首页</a><a href="../products/index.html">产品中心</a><a href="../industries/index.html">应用行业</a><a href="../about/index.html">关于我们</a><a href="../contact/index.html">联系我们</a><a class="nav-cta" href="../contact/index.html">获取方案</a>
       </nav>
     </header>
     <main>
@@ -23,21 +27,40 @@
         </div>
       </section>
       <section class="section contact-layout">
-        <form class="contact-form glass reveal">
-          <label>姓名 / 公司<input type="text" placeholder="例如：某某设备有限公司" /></label>
-          <label>关注产品<select><option>设备用油</option><option>DuraHyd 抗磨液压油</option><option>DuraSlide 导轨油</option><option>Duramult 主轴油</option><option>DuraKnit 针织机油</option><option>XheroGel 润滑脂</option><option>Tomo 金属加工液</option><option>Anti-ios 防锈油</option></select></label>
-          <label>需求说明<textarea placeholder="请填写工况、设备型号、所需资料或采购规格"></textarea></label>
-          <button class="btn primary" type="button" data-fake-submit>生成咨询摘要</button>
+        <div class="contact-card reveal">
+          <p class="eyebrow">Direct Contact</p>
+          <h2>联系希罗</h2>
+          <p class="contact-card__lead">围绕设备工况、产品资料、样品沟通与商务合作，建立更直接的需求对接路径。</p>
+          <dl class="contact-details">
+            <div><dt>电子邮箱</dt><dd><a href="mailto:marketing@xhero-oil.com.cn">marketing@xhero-oil.com.cn</a></dd></div>
+            <div><dt>公司地址</dt><dd>上海市青浦区胜利路1358号</dd></div>
+            <div><dt>沟通范围</dt><dd>产品资料、技术选型、样品沟通、商务合作与售后支持</dd></div>
+          </dl>
+        </div>
+        <form class="contact-form reveal" data-email-submit aria-labelledby="contact-form-title">
+          <div class="contact-form__intro">
+            <p class="eyebrow">Request Form</p>
+            <h2 id="contact-form-title">提交需求信息</h2>
+            <p>填写设备、工况和现用产品信息，便于进一步确认沟通方向。</p>
+          </div>
+          <div class="form-row">
+            <label>姓名<input type="text" name="name" autocomplete="name" placeholder="您的姓名" required /></label>
+            <label>公司<input type="text" name="company" autocomplete="organization" placeholder="公司名称" required /></label>
+          </div>
+          <label>关注产品<select name="product"><option value="GearOil">工业齿轮油</option><option value="equipment">设备用油（未确定具体系列）</option><option value="DuraHyd">DuraHyd 抗磨液压油</option><option value="DuraSlide">DuraSlide 导轨油</option><option value="Duramult">Duramult 主轴油</option><option value="DuraKnit">DuraKnit 针织机油</option><option value="XheroGel">XheroGel 润滑脂</option><option value="Tomo">Tomo 金属加工液</option><option value="Anti-ios">Anti-ios 防锈油</option></select></label>
+          <label>需求说明<textarea name="requirement" placeholder="请填写设备型号、运行工况、现用油品、所需资料或采购规格" required></textarea></label>
+          <button class="btn primary" type="submit">发送咨询邮件</button>
           <p class="form-note" role="status"></p>
         </form>
-        <div class="glass contact-card reveal">
-          <h2>联系希罗</h2>
-          <p>邮箱：marketing@xhero-oil.com.cn</p>
-          <p>地址：上海市青浦区胜利路1358号</p>
-          <p>服务内容：产品资料、技术选型、样品沟通、商务合作与售后支持。</p>
-        </div>
       </section>
     </main>
-    <script src="../assets/site.js?v=20260617-3"></script>
+    <footer class="site-footer subpage-footer">
+      <div><img class="footer-logo" src="../assets/xhero-logo-white.png?v=20260710-1" alt="Xhero 希罗石化" /><p>上海希罗石油化工有限公司，工业润滑油、润滑脂、金属加工液、防锈油及应用支持。</p></div>
+      <div><h4>产品分类</h4><a href="../products/?category=gear">工业齿轮油</a><a href="../products/?category=equipment">设备用油</a><a href="../products/?category=knit">针织机油</a><a href="../products/?category=metalworking">金属加工液</a><a href="../products/?category=grease">润滑脂</a><a href="../products/?category=rust">防锈油</a></div>
+      <div><h4>应用行业</h4><a href="../industries/index.html">风电设备</a><a href="../industries/index.html">精密制造</a><a href="../industries/index.html">人形机器人</a><a href="../industries/index.html">电子化学品</a></div>
+      <div><h4>联系方式</h4><a href="mailto:marketing@xhero-oil.com.cn">marketing@xhero-oil.com.cn</a><a href="../contact/index.html">上海市青浦区胜利路1358号</a></div>
+      <p class="copyright">© 2026 上海希罗石油化工有限公司. All rights reserved.</p>
+    </footer>
+    <script src="../assets/site.js?v=20260711-11"></script>
   </body>
 </html>
