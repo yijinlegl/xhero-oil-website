@@ -35,6 +35,7 @@
   }
 
   const header = document.querySelector(".site-header");
+  const heroCopy = document.querySelector(".gw-hero__copy");
   let previousScrollY = window.scrollY;
   let framePending = false;
 
@@ -42,6 +43,14 @@
     const scrollY = window.scrollY;
 
     revealPassedElements();
+
+    if (heroCopy) {
+      const fadeDistance = Math.max(window.innerHeight * 0.18, 120);
+      const fadeProgress = Math.min(Math.max(scrollY / fadeDistance, 0), 1);
+      heroCopy.style.setProperty("--gw-hero-copy-opacity", (1 - fadeProgress).toFixed(3));
+      heroCopy.style.setProperty("--gw-hero-copy-shift", `${Math.round(fadeProgress * -28)}px`);
+      heroCopy.setAttribute("aria-hidden", fadeProgress >= 1 ? "true" : "false");
+    }
 
     if (header && !document.body.classList.contains("nav-open")) {
       const movingDown = scrollY > previousScrollY + 4;
