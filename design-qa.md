@@ -41,7 +41,7 @@ Desktop page heights were 10,742 px (home), 4,635 px (products), 4,176 px (indus
 
 ## Iterations Resolved
 
-- Reworked the home hero message into a static `希罗润滑 / 让工业运转更可靠` lockup using one shared, reduced font scale and a clearer background-coordinated steel silver-gray on desktop and mobile.
+- Reworked the home hero message into the same hierarchy as the later image-copy panels: a small English label above two white Chinese title lines, using the same 36 px desktop and 32 px mobile heading scale.
 - Replaced the soft full-width manufacturing image with a locally hosted 3000 x 2000 industrial-robot production-line photograph and rebalanced the overlay for sharper equipment detail.
 - Reframed the industrial-robot production-line image as the third image-plus-side-copy feature section to match the preceding transmission and manufacturing sections.
 - Consolidated industrial gear oil into the equipment-oil taxonomy across filters, product cards, footer links, and home-page product architecture.

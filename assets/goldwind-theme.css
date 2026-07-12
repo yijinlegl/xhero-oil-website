@@ -274,26 +274,26 @@ body.gw-theme main > section.float-section {
 }
 
 .gw-hero__primary {
-  color: #b9c7ce;
-  font-size: clamp(48px, 4vw, 60px);
-  font-weight: 650;
-  line-height: 1.12;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.25;
   text-shadow: 0 10px 28px rgba(0, 13, 26, 0.28);
 }
 
 .gw-hero__secondary {
-  margin-top: 12px;
-  color: #b9c7ce;
-  font-size: clamp(48px, 4vw, 60px);
-  font-weight: 650;
-  line-height: 1.12;
+  margin-top: 6px;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.25;
   text-shadow: 0 10px 28px rgba(0, 13, 26, 0.28);
 }
 
 .gw-hero__meta {
-  margin-top: 28px;
-  color: rgba(151, 171, 183, 0.78);
-  font-size: 13px;
+  margin: 0 0 28px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -1383,18 +1383,18 @@ body.gw-theme[data-page="contact"] select {
   }
 
   .gw-hero__primary {
-    font-size: 38px;
+    font-size: 32px;
   }
 
   .gw-hero__secondary {
-    margin-top: 10px;
-    font-size: 38px;
-    line-height: 1.12;
+    margin-top: 5px;
+    font-size: 32px;
+    line-height: 1.25;
   }
 
   .gw-hero__meta {
-    margin-top: 25px;
-    font-size: 10px;
+    margin: 0 0 24px;
+    font-size: 11px;
   }
 
   .gw-hero__scroll {
@@ -1678,7 +1678,7 @@ body.gw-theme[data-page="contact"] select {
 @media (max-width: 560px) {
   .gw-hero__primary,
   .gw-hero__secondary {
-    font-size: 38px;
+    font-size: 32px;
   }
 
   .gw-heading h2,
