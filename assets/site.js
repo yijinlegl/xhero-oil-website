@@ -169,6 +169,8 @@ function applyProductFilter() {
     if (!hidden) visibleCount += 1;
   });
 
+  if (productGrid) productGrid.dataset.visibleCount = String(visibleCount);
+
   const result = document.querySelector("[data-filter-result]");
   if (result) {
     const label = active === "all" ? "全部" : activeButton?.textContent.trim() || "当前分类";

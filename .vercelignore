@@ -8,3 +8,4 @@ node_modules/
 package-lock.json
 *.log
 preview-*.png
+assets/industry-humanoid.jpg
