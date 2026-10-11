@@ -441,7 +441,7 @@ document.querySelectorAll("[data-email-submit]").forEach((form) => {
       "需求说明：",
       String(data.get("requirement") || "未填写"),
     ].join("\n");
-    window.location.href = `mailto:marketing@xhero-oil.com.cn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:Sales@xhero-oil.com.cn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const note = form.querySelector(".form-note");
     if (note) note.textContent = "已打开邮件应用，请确认内容后发送。";
   });
